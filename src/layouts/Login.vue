@@ -1,14 +1,15 @@
 <template>
     <div class="page-container">
         <div class="login-form-container">
+            
             <div class="u-input-container">
                 <input id="u-input" type="text" value="Username"/>
             </div>
-            
+
             <div class="p-input-container">
                 <input id="p-input" type="text" value="Password"/>
             </div>
-            
+
             <input id="input-submit-button" class="submit-button" type="submit" value="login"/>
         </div>
     </div>

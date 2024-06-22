@@ -3,7 +3,8 @@
         <h2 class="input-lang-display">{{this.name}}</h2>  
         <DropDown />
     </div>
-    <input type="text" class="code-input-box"/>
+    <input type="file" id="file-input"/>
+    <input type="text" id="text-input-box" class="code-input-box"/>
 </template>
 
 <script>
@@ -13,8 +14,41 @@ export default {
     props: ["name"],
     components: {
         DropDown,
+    },
+    methods: {
+        readInputContents(){
+            document.getElementById('file-input').addEventListener('change', function(event) {
+                const fileHolder = event.target.files;
+                console.log(fileHolder) 
+                if (fileHolder.length > 1) {
+                    for(let i = 0; i < fileHolder.length; i++){
+                        let file = fileHolder[i];
+
+                        if (file) {
+                            const reader = new FileReader();
+                            
+                            reader.onload = function(e) {
+                                const contents = e.target.result;
+                                console.log(contents); // Process the contents here
+                            };
+                            
+                            reader.onerror = function(e) {
+                                console.error("Error reading file:", e.target.error);
+                            };
+
+                            reader.readAsText(file); // Read the file as text
+                        } else {
+                            console.log("No file selected");
+                        }
+
+                    }
+                }
+            }); 
+        },// END OF readInputContents
     }
 }
+
+
 </script>
 
 <style>
@@ -43,3 +77,4 @@ export default {
 }
 
 </style>
+
