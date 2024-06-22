@@ -1,13 +1,28 @@
 from typing import Dict, List
+import time
 import os
+from src import db
 
 class NoFile(Exception): 
     pass
 
+#1719021910385135000 time in nanoseconds
 class SessionHandler:
     def __init__(self) -> None:
+        self.active = True
+        self.max_age = 990000000000
+        self.init_time: int = time.time_ns()
         self.active_users: List[Dict[str, str]] = []
 
+        if not self.active:
+            pass
+    
+    def check_active(self):
+        time_spent = (time.time_ns() - self.init_time)
+        if time_spent > self.max_age:
+            self.active = False
+            
+            
 class Cacher:
     def __init__(self, username, session):
         self.session_tag = session
@@ -21,10 +36,6 @@ class Cacher:
     def __repr__(self) -> str:
         s = ""
         return s 
-
-
-class NoFile(Exception):
-    pass
 
 class FileNode:
     def __init__(self, path, name) -> None:
@@ -55,6 +66,7 @@ class FolderNode:
                 FileNode(os.path.join(self.path, i), i) 
                 for i in os.listdir(os.path.join(self.path,self.name))
                 ]
+        
     def __repr__(self) -> str:
         return  \
         f"<{self.name.upper()}: {self.contents.__repr__()}>"
