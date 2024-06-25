@@ -1,16 +1,14 @@
 from typing import Dict, List
 import time
 import os
-from src import db
 
 class NoFile(Exception): 
     pass
 
-#1719021910385135000 time in nanoseconds
 class SessionHandler:
     def __init__(self) -> None:
         self.active = True
-        self.max_age = 990000000000
+        self.max_age = 990000000000 # time in nanoseconds
         self.init_time: int = time.time_ns()
         self.active_users: List[Dict[str, str]] = []
 

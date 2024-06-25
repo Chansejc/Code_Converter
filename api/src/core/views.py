@@ -1,15 +1,16 @@
 from flask import Blueprint, jsonify, request
+from src.accounts import models
+from src import db
 import os
 import flask
 
 core_bp = Blueprint("core", __name__)
 
-@core_bp.route("api/core/home", methods=["GET"])
-def test():
-    print("<Core Blueprint Reached>")
-    return flask.Response("<Core Blueprint Reached>", 200)
+@core_bp.route("/api/core/email_available/<email>/", methods=["GET"])
+def test(email):
+    return jsonify(True) 
 
-@core_bp.route("api/core/getquery", methods=["GET"])
+@core_bp.route("/api/core/getquery", methods=["GET"])
 def query():
     print("<Core (Query) Blueprint Reached>")
     content: str = ""
@@ -23,11 +24,10 @@ def query():
             "Data": content
             })
 
-@core_bp.route("api/core/savefile", methods=["GET"])
+@core_bp.route("/api/core/savefile", methods=["GET"])
 def savefile():
     user = request.args.get("username")
     print("<Core Blueprint Reached>")
     return flask.Response("<Core Blueprint Reached>", 200)
-
 
 
