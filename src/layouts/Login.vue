@@ -1,16 +1,20 @@
 <template>
-    <div class="page-container">
-        <div class="login-form-container">
-            
-            <div class="u-input-container">
-                <input id="u-input" type="text" value="Username"/>
-            </div>
+    <div class="login-container">
+        <div class="login-leftside">
+        </div>
+        <div class="page-container">
+            <div class="login-form-container">
+                
+                <div class="u-input-container">
+                    <input id="u-input" type="text" value="Username"/>
+                </div>
 
-            <div class="p-input-container">
-                <input id="p-input" type="text" value="Password"/>
-            </div>
+                <div class="p-input-container">
+                    <input id="p-input" type="text" value="Password"/>
+                </div>
 
-            <input id="input-submit-button" class="submit-button" type="submit" value="login"/>
+                <input id="input-submit-button" class="submit-button" type="submit" value="login"/>
+            </div>
         </div>
     </div>
 </template>
@@ -31,6 +35,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #686D76;
 }
 
 #u-input, #p-input{
@@ -38,17 +43,17 @@ export default {
     width: 100%;
     font-size: 18pt;
     text-align: center;
+    border-radius: 25px;
     border: none;
-    color: grey ;
-    border-radius: 2%;
-    background: none;
+    background-color: white;
+    box-shadow: 0px 0px 0px 3px rgba(0,0,0,0.1);
 }
 
 .u-input-container, .p-input-container{
     height: 20%;
     width: 50%;
-    border: solid #DDDDDD 2.5px; 
-    border-radius: 5%;
+    border: none;
+    background: none;
 }
 
 .page-container{
@@ -63,6 +68,6 @@ export default {
 .submit-button{
     height: 10%;
     width: 15%;
-    font-size: 18pt;
+    font-size: 6pt;
 }
 </style>

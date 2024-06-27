@@ -6,8 +6,7 @@ from src import bcrypt
 import flask
 
 # Blueprint todos:
-## When queries are sent to the server from the client should I encrypt the URL that is being used--
-##      then decrypt the message on the server side.
+## Setup email verification for account creation and account removal. (SMTP email Library)
 
 accounts_bp = Blueprint("accounts", __name__)
 
@@ -27,13 +26,11 @@ def new(email, pw):
         print(f"<Successfuly added User( Email: {email} )")
         return jsonify({"Status": "Success"})
     except Exception as e:
-        print("Problem at endpoint [ACCOUNTS>>CREATE]",e)
+        print("Problem at endpoint [ACCOUNTS >> CREATE]",e)
         return jsonify({"Status": "Fail"})
 
 @accounts_bp.route("/api/accounts/verify_removal/<email>/", methods=["GET"])
 def verify_removal():
-    #Will need to look into the SMTP library and the email library.
-    #It is possible to host an SMTP server locally and send/recieve the emails through that.
     return flask.Response(str(True),200)
 
 @accounts_bp.route("/api/accounts/remove/<email>/", methods=["POST"])

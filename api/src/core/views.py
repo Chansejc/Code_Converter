@@ -1,3 +1,4 @@
+from typing import List
 from flask import Blueprint, jsonify, request
 from src.accounts import models
 from src import db
@@ -6,28 +7,21 @@ import flask
 
 core_bp = Blueprint("core", __name__)
 
-@core_bp.route("/api/core/email_available/<email>/", methods=["GET"])
-def test(email):
-    return jsonify(True) 
-
-@core_bp.route("/api/core/getquery", methods=["GET"])
-def query():
-    print("<Core (Query) Blueprint Reached>")
-    content: str = ""
+@core_bp.route("/api/core/add_entry/<filename>/<email>", methods=["GET","POST"])
+def query(email, filename):
+    print("<Core>>Query Endpoint Reached>")
+    status = "Success"
+    user: None | models.User = None 
     try:
-        with open("/mnt/c/MyStuff/projects/converter/api/src/assets/query_buffer.txt", "r") as f:
-            content = f.read()
-    except FileNotFoundError as e:
-        print("<Location-> Core/Query>\n<Error Reading Query Buffer File>\n", e)
+        users: List[models.User] = db.session.query(models.User).all()
+        user_id : int = list(filter(lambda x: x.email == email ,users))[0].id
+         
+    except Exception as e:
+        print("<Error Raised in [Core>>add_entry]>", e)
+        status = "Fail"
     finally:
         return jsonify({
-            "Data": content
+            "Status": f"{status}"
             })
-
-@core_bp.route("/api/core/savefile", methods=["GET"])
-def savefile():
-    user = request.args.get("username")
-    print("<Core Blueprint Reached>")
-    return flask.Response("<Core Blueprint Reached>", 200)
 
 

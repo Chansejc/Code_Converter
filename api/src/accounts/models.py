@@ -17,10 +17,21 @@ class User(db.Model):
         self.awaiting_removal = False
 
     def __repr__(self):
-        return  \
-        f"""
-        <Email: {self.email}>
-        <ID: {self.id}>
-        <Date Created: {self.created_on}>
-        <Awaiting Removal: {self.awaiting_removal}>
-        """
+        return f"'Email': {self.email}, 'ID': {self.id}, 'Date Created': {self.created_on}, 'Awaiting Removal': {self.awaiting_removal}" 
+
+class Entry(db.Model):
+    __tablename__ = "user_entries"
+
+    entry_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, nullable=False)
+    file_id = db.Column(db.String, nullable=False, unique=True)
+    created_on = db.Column(db.DateTime, nullable=False)
+
+    def __init__(self, user_id: int, file_id: str):
+        self.user_id = user_id
+        self.file_id = file_id
+        self.created_on = datetime.now()
+
+    def __repr__(self):
+        return f"<|File: {self.file_id}|User:{self.user_id}|>"
+
