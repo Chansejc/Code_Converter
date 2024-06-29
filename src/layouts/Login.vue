@@ -1,73 +1,134 @@
 <template>
-    <div class="login-container">
-        <div class="login-leftside">
+    <div id="page-container"> 
+        <div id="blank-side-container">
+            <SloganHolder/>
         </div>
-        <div class="page-container">
-            <div class="login-form-container">
-                
-                <div class="u-input-container">
-                    <input id="u-input" type="text" value="Username"/>
+        <div id="login-form-container">
+                <div id="top-title-container">
+                    <h2 class="Caps title-letter">C</h2><p>o</p><p>d</p><p>e</p>
                 </div>
-
-                <div class="p-input-container">
-                    <input id="p-input" type="text" value="Password"/>
+                <div id="bottom-title-container">
+                    <h2 class="Caps title-letter">C</h2><p>o</p><p>n</p><p>v</p><p>e</p><p>r</p><p>t</p><p>e</p><p>r</p>
                 </div>
-
-                <input id="input-submit-button" class="submit-button" type="submit" value="login"/>
-            </div>
+                <input id="u-input" type="text" value="Username"/>
+                <input id="p-input" type="text" value="Password"/>
+                <input id="input-submit-button" class="submit-button" type="submit" value="Login"/>
         </div>
     </div>
 </template>
 
 <script>
+import SloganHolder from "../components/SloganHolder.vue";
 export default {
-   name: "Login" 
+    name: "Login",
+    components: {
+        SloganHolder
+    }
 }
 </script>
 
 <style>
-.login-form-container {
-    border: solid 4px grey;
-    height: 50%;
-    width: 50%;
+
+#app{
     display: flex;
-    gap: 10%;
+    justify-content: center;
+    align-items: center;
+}
+
+#app > div{
+    padding: 0;
+    margin: 0;
+}
+
+#page-container{
+    height: 96vh;
+    width: 96vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /*border: solid 2px green; */
+    align-items: center;
+}
+
+@media screen and (max-width: 750px) {
+    #page-container {
+        flex-direction: column;
+    }
+    #login-form-container{
+      box-shadow: none; 
+      height: 35vh;
+    }
+    #blank-side-container{
+        height: 35vh;
+    }
+}
+
+@media screen and (min-width: 750px) {
+    #login-form-container{
+        box-shadow: -4px 0px 0px 0px rgba(0,0,0,.1);
+        height: 94vh;
+    }
+    #blank-side-container{
+        height: 94vh;
+    }
+}
+
+#login-form-container {
+    border: none;
+    width: 48vw;
+    display: flex;
+    gap: 2rem;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #686D76;
 }
 
 #u-input, #p-input{
-    height: 100%;
-    width: 100%;
-    font-size: 18pt;
     text-align: center;
+    height: 60px;
+    width: 250px;
+    font-size: 14pt;
     border-radius: 25px;
-    border: none;
+    border: .25px grey;
     background-color: white;
-    box-shadow: 0px 0px 0px 3px rgba(0,0,0,0.1);
+    box-shadow: 1px 2px 4px 3px rgba(0,0,0,0.1);
 }
 
-.u-input-container, .p-input-container{
-    height: 20%;
-    width: 50%;
+.submit-button{
+    height: 65px;
+    width: 100px;
+    font-size: 14pt;
+    border-radius: 2rem;
     border: none;
-    background: none;
+    box-shadow: 1px 2px 2px 3px rgba(0,0,0,0.1);
 }
 
-.page-container{
-    height: 98vh;
-    width: 98vw;
-    margin: 0;
+#blank-side-container{
+    /*border: solid yellow 2px;*/
+    width: 46vw;
+}
+
+#top-title-container, #bottom-title-container{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
-.submit-button{
-    height: 10%;
-    width: 15%;
-    font-size: 6pt;
+
+#top-title-container > p, #bottom-title-container > p {
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 40pt;
+    margin: 0;
+    padding: 0;
 }
+
+#top-title-container > h2, #bottom-title-container > h2 {
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 64pt;
+    margin: 0;
+    padding: 0;
+}
+
 </style>
