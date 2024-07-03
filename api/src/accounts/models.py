@@ -1,6 +1,17 @@
 from datetime import datetime
 from src import bcrypt, db
 
+def get_user(email, model):
+    user = list(filter(lambda x: x.email == email, db.session.query(model).all()))
+    print("Here!")
+    if user == []: raise UserNotFound("User Not Found")
+    print("There!")
+    print("User =>", user)
+    return user[0] 
+
+class UserNotFound(Exception):
+    pass
+
 class User(db.Model):
     __tablename__ = "users"
 

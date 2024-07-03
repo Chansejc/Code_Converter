@@ -1,46 +1,32 @@
 <template>
-    <div class="nav-container">
-        <p>Code Converter</p> 
-        <div class="right-item-container">
-            <NavItemSmall title="Share"/>
-            <ProfileItem />
-        </div>
+    <div id="nav-container">
+        <h1>Code Converter</h1> 
     </div>
 </template>
 
 <script>
-import NavItemSmall from "../components/NavItemSmall.vue"
-import ProfileItem from "../components/ProfileItem.vue"
 export default {
     name: "NavBar",
-    components:{
-        NavItemSmall,
-        ProfileItem
-    },
+    components:{},
 }
-
 </script>
 
 <style>
-.nav-container {
-   width: 100%;
-   height: 75px;
-   border-bottom: solid grey 1px;
-   background: white;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-}
-.right-item-container {
+
+#nav-container {
+    border-bottom: solid rgba(0,0,0,.75) 1px;
+    width: 98vw;
+    height: 75px;
+    background: white;
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
-    margin-right: 2rem;
-    width: 150px;
 }
-p {
-    margin: 1rem 2rem;
-    font-size: 20pt;
+
+#nav-container > h1 {
+    margin: 3vh 0 3vh 5vw;
+    font-size: 32pt;
     font-weight: 600;
 }
+
 </style>

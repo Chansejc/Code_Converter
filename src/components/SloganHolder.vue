@@ -38,7 +38,7 @@ export default {
         width: 0px;
     }
     #slogan-main-container{
-        height: 45vh;
+        height: 37vh;
         border-bottom: solid .25px grey;
     }
     img {

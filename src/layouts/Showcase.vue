@@ -1,7 +1,7 @@
 <template>
     <div class="showcase-container">
         <div class="input-form-container">
-            <InputForm name=Python />
+            <InputForm email=cc@buchanan.com name=Python />
         </div>
         <ModelPicker model="GPT-4" />
         <div class="output-form-container">

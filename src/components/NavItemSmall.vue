@@ -1,6 +1,6 @@
 <template>
     <div class="navitem-container-small">
-        <p>{{this.title}}</p>
+        <button id="share" onclick="this.copyLink">{{this.title}}</button>
     </div>
 </template>
 
@@ -8,13 +8,26 @@
 export default {
     name: "NavItemSmall",
     props: ['title'],
-    methods: {},
-    created() {},
+    created() {
+            
+    },
+    methods: {
+        copyLink() {
+            var temp = $("<input>");
+            $("body").append(temp);
+            temp.value = "code-converter.com";
+            document.select(temp);
+            document.execCommand("copy");
+            temp.remove();
+        },
+    },
+
 }
 </script>
 
 <style>
-.navitem-container-small{
+
+.navitem-container-small {
     margin-right: 1rem;
     border-radius: 15px;
     background: black;
@@ -22,11 +35,12 @@ export default {
     justify-content: center;
     align-items: center;
     color: white;
-    /*box-shadow: 4px 6px 0px rgb(0, 0, 0, 2);*/
+    box-shadow: 4px 6px 0px rgb(0, 0, 0, .1);
 }
-p {
+.navitem-container-small > button {
     font-size: 12pt;
     font-weight: 400;
     margin: 1rem;
 }
+
 </style>

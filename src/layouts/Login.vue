@@ -4,25 +4,24 @@
             <SloganHolder/>
         </div>
         <div id="login-form-container">
-                <div id="top-title-container">
-                    <h2 class="Caps title-letter">C</h2><p>o</p><p>d</p><p>e</p>
-                </div>
-                <div id="bottom-title-container">
-                    <h2 class="Caps title-letter">C</h2><p>o</p><p>n</p><p>v</p><p>e</p><p>r</p><p>t</p><p>e</p><p>r</p>
-                </div>
-                <input id="u-input" type="text" value="Username"/>
-                <input id="p-input" type="text" value="Password"/>
-                <input id="input-submit-button" class="submit-button" type="submit" value="Login"/>
+                <Title />
+                <Inputs />
         </div>
     </div>
 </template>
 
 <script>
 import SloganHolder from "../components/SloganHolder.vue";
+import Title from "../components/Title.vue";
+import Inputs from "../components/Inputs.vue";
 export default {
     name: "Login",
     components: {
-        SloganHolder
+        SloganHolder,
+        Title,
+        Inputs
+    },
+    methods: {
     }
 }
 </script>
@@ -50,9 +49,14 @@ export default {
     align-items: center;
 }
 
+@media screen and (min-width: 750px){
+}
+
 @media screen and (max-width: 750px) {
     #page-container {
         flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
     }
     #login-form-container{
       box-shadow: none; 
@@ -83,52 +87,9 @@ export default {
     justify-content: center;
 }
 
-#u-input, #p-input{
-    text-align: center;
-    height: 60px;
-    width: 250px;
-    font-size: 14pt;
-    border-radius: 25px;
-    border: .25px grey;
-    background-color: white;
-    box-shadow: 1px 2px 4px 3px rgba(0,0,0,0.1);
-}
-
-.submit-button{
-    height: 65px;
-    width: 100px;
-    font-size: 14pt;
-    border-radius: 2rem;
-    border: none;
-    box-shadow: 1px 2px 2px 3px rgba(0,0,0,0.1);
-}
-
 #blank-side-container{
     /*border: solid yellow 2px;*/
     width: 46vw;
-}
-
-#top-title-container, #bottom-title-container{
-    display: flex;
-    align-items: center;
-}
-
-#top-title-container > p, #bottom-title-container > p {
-    font-family: "Roboto Condensed", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 40pt;
-    margin: 0;
-    padding: 0;
-}
-
-#top-title-container > h2, #bottom-title-container > h2 {
-    font-family: "Roboto Condensed", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 64pt;
-    margin: 0;
-    padding: 0;
 }
 
 </style>
