@@ -1,17 +1,22 @@
 <template>
         <div class="dropdown">
-          <button class="dropbtn">Dropdown</button>
-          <div class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-          </div>
+            <button :id="newID" class="dropbtn">{{this.title}}</button>
+            <div class="dropdown-content">
+                <a v-for="item in opts"  @click="this.title = item.name">{{ item.name }}</a>
+            </div>
         </div>
 </template>
 
 <script>
+let title = "Dropdown";
 export default {
     name: "DropDown",
+    props: ["opts", "newID"],
+    data(){
+        return{
+            title
+        }
+    },
 }
 </script>
 
@@ -31,10 +36,8 @@ export default {
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
     display:flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
-    width: 215px;
-    height: 45px;
     background-color: white;
     box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.2);
     font-size: 14pt;
@@ -62,14 +65,14 @@ export default {
   color: black;
   padding: 8px 12px;
   text-decoration: none;
-  display: block;
+  display: inline-block;
 }
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #ddd;}
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {display: inline-block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #3e8e41;}

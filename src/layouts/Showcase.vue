@@ -1,11 +1,11 @@
 <template>
     <div class="showcase-container">
         <div class="input-form-container">
-            <InputForm email=cc@buchanan.com name=Python />
+            <InputForm/>
         </div>
         <ModelPicker model="GPT-4" />
         <div class="output-form-container">
-            <OutputForm name=C# />
+            <OutputForm/>
         </div>
     </div>
 </template>

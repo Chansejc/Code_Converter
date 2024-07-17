@@ -1,43 +1,62 @@
 <template>
-    <div class="io-head-container">
-        <h2 class="output-lang-display">{{this.name}}</h2>  
-        <DropDown />
+    <div id="o-head-container">
+        <h2 id="output-lang-display">{{this.name}}</h2>  
+        <DropDown v-bind:opts="this.languages" />
     </div>
-    <input type="text" class="code-input-box"/>
+    <textarea id="code-output-box" ></textarea>
 </template>
 
 <script>
 import DropDown from "../components/DropDown.vue"
+const languages = [
+    { name: "Python" },
+    { name: "C++"},
+    { name: "C"},
+    { name: "Go"},
+    { name: "Rust"},
+    { name: "Elixr"},
+    { name: "Lua"},
+    { name: "TypeScript"},
+    { name: "Java"}
+];
+
 export default {
     name:"OutputForm",
     props: ["name"],
     components: {
         DropDown,
+    },
+    data(){
+        return{
+            languages
+        }
     }
 }
 </script>
 
 <style>
-.output-lang-display{
+#output-lang-display{
     color: black;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 16pt;
     text-align: center;
 }
-.io-head-container {
+
+#o-head-container {
     width: 100%;
     height: 10%;
     /*border: solid 1px grey;*/
     display: flex;
     align-items: center;
 }
-.code-input-box {
+
+#code-output-box {
     border: solid 1px;
     border-color: #DDDDDD;
     border-radius: 1%;
     height: 90%;
     width: 90%;
-    text-align: center;
+    text-align: start;
 }
 
 </style>

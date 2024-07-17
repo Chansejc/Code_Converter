@@ -1,100 +1,65 @@
 <template>
-    <div class="io-head-container">
-        <h2 class="input-lang-display">{{this.name}}</h2>  
-        <DropDown />
-    <input type="file" id="file-input" @change="this.handleFileInput($event)"/>
+    <div id="i-head-container">
+        <h2 id="input-lang-display">{{this.name}}</h2>  
+        <DropDown :opts="this.languages" />
     </div>
-    <input type="text" id="text-input-box" class="code-input-box"/>
-</template>
+    <textarea id="code-input-box" maxlength="800" value="Type here"
+            @input="e => this.getChars(e)"></textarea> 
 
+    <h2 id="char-counter">{{this.currentChars}} / {{this.MAXCHARS}}</h2>
+</template>
 <script>
     import DropDown from "../components/DropDown.vue";
-    import pako from 'pako';
-    import Buffer from 'buffer';
+    const MAXCHARS = 800;
+    let inputBox =  document.getElementById("code-input-box");
+    let currentChars = 0;
+    let lastPressed = null;
+    const languages = [
+        { name: "Python" },
+        { name: "C++"},
+        { name: "C"},
+        { name: "Go"},
+        { name: "Rust"},
+        { name: "Elixr"},
+        { name: "Lua"},
+        { name: "TypeScript"},
+        { name: "Java"}
+    ];
 
     export default {
-        name:"InputForm",
-        props: ["name", "email"],
         components: {
-            DropDown,
+            DropDown
         },
-        data(){
-            let contents = null;
-            const email = this.email;
-        },
+        data() {
+            return {
+                languages,
+                currentChars,
+                MAXCHARS
+            }
+        },  
         methods: {
-            handleFileInput(e){
-                const fileHolder = e.target.files;
-                console.log(fileHolder) 
-                switch (fileHolder.length){
-                    case 0:
-                        console.log("No file selected");
-                        break;
-                    case 1:
-                        console.log("Hit case 1");
-                        let reader = new FileReader();
-                        const file = fileHolder[0];
-                        reader.onload = (e) => { //This is the only thing that is performing an 
-                            console.log(e.target.result); // operation on the contents of the file 
-                            this.contents = this.compressFile(e.target.result);
-                            this.sendFile();
-                        };
-                        reader.onerror = (e) => {
-                            console.error("Error reading file.", e.target.error);
-                        };
-                        reader.readAsText(file); //This activates the onload callback once the file is read.
-                        break;
-                    default:
-                        console.log("too many files selected");
-                }
-            },// END OF handleFileInput
-            uint8ToBase64(uint8) {
-                return btoa(String.fromCharCode.apply(null, uint8));
-            },
-            compressFile(fileContents){
-                let compressed = pako.deflate(fileContents); // Function to compress and encode a string
-                let base64String = this.uint8ToBase64(compressed);
-                const b64Split = base64String.split('');
-                for (let i = 0; i < b64Split.length; i++){
-                    if (b64Split[i] == "/") {
-                        console.log(b64Split[i], i);
-                        b64Split[i] = "+";
-                    }
-                }
-                const final = b64Split.join('');
-                console.log("Compressed and encoded string:", base64String);
-                return final;
-
-            },// END OF CompressFile
-            async sendFile() {
-                console.log("Attempting to send file to API");
-                try{
-                    let dataToSend = this.contents;
-                    let response = await fetch(`http://localhost:5000/api/core/rec_file/${this.email}/${dataToSend}`);
-                    if (!response.ok) throw new Error("Server did not respond with OK");
-                    let result = await response.json();
-                    console.log("Operation SendFile was a ", result);
-                }catch(err){
-                    console.log(err);
-                }finally{
-                    console.log("No longer Loading");
-                }
-            },//END OF sendFile
-        }
+            getChars(event){ //This is constantly changing the character counter element
+                let curValue = event.target.value;
+                let cur = (this.inputBox !== null) ? curValue.length : 0;
+                this.currentChars = cur;
+            },//end of this.getChars
+        },
+        props: [
+            'name'
+        ],
     }
-
 </script>
 
 <style>
 
-.input-lang-display{
+#input-lang-display{
     color: black;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 16pt;
     text-align: center;
 }
 
-.io-head-container {
+#i-head-container {
     width: 100%;
     height: 10%;
     /*border: solid 1px grey;*/
@@ -103,13 +68,24 @@
     gap: 5%;
 }
 
-.code-input-box {
+#code-input-box {
     border: solid 1px;
     border-color: #DDDDDD;
     border-radius: 1%;
-    height: 90%;
-    width: 90%;
-    text-align: center;
+    height: 85vh;
+    width: 35vw;
+    text-align: start;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  /*border: 2px solid #ccc;*/
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 14pt;
+  resize: none;
 }
 
 </style>
