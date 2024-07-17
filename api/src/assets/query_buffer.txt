@@ -1,2 +1,0 @@
-this file is for holding the buffer of a query and
-these are its contents.
